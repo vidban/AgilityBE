@@ -6,7 +6,7 @@ const SECRET = process.env.SECRET_KEY || "test";
 
 const BCRYPT_WORK_FACTOR = 10;
 
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 let DB_URI;
 
