@@ -37,6 +37,12 @@ class Event {
 		return result.rows[0];
 	}
 
+  static async updateEvent(userId,event){
+    const result = await db.query(
+      `UPDATE events SET _start=$1, _end=$2, allday=$3 WHERE id=$4 AND userid=$5 RETURNING id,title,_start as start,_end as end,allday,color`,[event.start,event.end,event.allday,event.id,userId]);
+    return result.rows[0];
+  }
+
 	static async removeEvent(eventId){
 		const response = await db.query(
 			`DELETE FROM events WHERE id=$1`, [eventId]);

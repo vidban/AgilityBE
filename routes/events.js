@@ -50,6 +50,17 @@ router.post("/:id/add", ensureCorrectUser, async (req,res,next) => {
 	}
 })
 
+router.patch("/:id/update", ensureCorrectUser, async (req, res,next) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    const event = await Event.updateEvent(id,data);
+    return res.json({event});
+  } catch (error) {
+    return next(error);
+  }
+})
+
 router.delete("/:id/remove", async (req,res,next) => {
 	const id = req.params.id;
 	try {
